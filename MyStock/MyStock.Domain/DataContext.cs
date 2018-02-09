@@ -11,7 +11,9 @@ namespace MyStock.Domain
     {
         public DataContext() : base("DefaultConnection")
         {
-
         }
+
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }

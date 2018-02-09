@@ -8,5 +8,6 @@ namespace MyStock.Backend.Models
 {
     public class DataContextLocal : DataContext
     {
+       
     }
 }
