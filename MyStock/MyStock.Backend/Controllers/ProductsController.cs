@@ -11,7 +11,8 @@ using MyStock.Backend.Models;
 using MyStock.Domain;
 
 namespace MyStock.Backend.Controllers
-{
+{   
+    [Authorize]
     public class ProductsController : Controller
     {
         private DataContextLocal db = new DataContextLocal();

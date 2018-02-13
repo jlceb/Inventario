@@ -35,6 +35,8 @@ namespace MyStock.Domain
         [DataType(DataType.Date)]
         public DateTime LastPurchase { get; set; }
 
+        public string Image { get; set; }
+
         public double Stock { get; set; }
 
         [JsonIgnore]

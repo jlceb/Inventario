@@ -13,6 +13,7 @@ using MyStock.Domain;
 
 namespace MyStock.API.Controllers
 {
+    [Authorize]
     public class CategoriesController : ApiController
     {
         private DataContext db = new DataContext();

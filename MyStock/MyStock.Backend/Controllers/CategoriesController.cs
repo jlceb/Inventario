@@ -12,6 +12,7 @@ using MyStock.Domain;
 
 namespace MyStock.Backend.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private DataContextLocal db = new DataContextLocal();
