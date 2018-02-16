@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyStock.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace MyStock
 		{
 			InitializeComponent();
 
-			MainPage = new MyStock.MainPage();
+            MainPage = new NavigationPage(new LoginView());
 		}
 
 		protected override void OnStart ()

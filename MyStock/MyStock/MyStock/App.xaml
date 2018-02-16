@@ -1,10 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:infra="clr-namespace:MyStock.Infrastructure"
              x:Class="MyStock.App">
 	<Application.Resources>
 
-		<!-- Application resource dictionary -->
+        <ResourceDictionary>
 
-	</Application.Resources>
+            <!-- Propiedades de los botones-->
+            <Style x:Key ="GeneralButton" TargetType ="Button">
+                <Setter Property="BorderRadius" Value="25"></Setter>
+                <Setter Property="HeightRequest" Value="50"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+            </Style>
+
+            <!-- Locator -->
+            <infra:InstanceLocator x:Key="Locator"></infra:InstanceLocator>
+            
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

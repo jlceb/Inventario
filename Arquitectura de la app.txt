@@ -1,0 +1,8 @@
+
+1.- Crear las carpetas MainViewModel y Views
+1.1.- Crear una ViewModel principal, MainViewModel, desde donde arrancará el proyecto
+2.- Crear la infraestructura con el InstanceLocator
+3.- Crear las View
+3.1.- Se crea la primera View, LoginView, esta será la pantalla de inicio de la app. Esto hace que, en el constructor de la MainViewModel se cree una instancia de la LoginView, ya que siendo la MainViewModel, la principal, esta tiene que instanciar la vista de arranque del proyecto. 
+3.2.- Dentro del LoginView.xaml se debe agregar el bindingcontext principal hacia la MainViewModel, y luego, dentro del cuerpo del stacklayout se incorpora el bindingcontext hacia la LoginViewModel.
+4.- Indicar en el code behind de App.axml el MainPage apuntando a una NavigationPage que arranca por LoginView
