@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace MyStock.ViewModels
 {
@@ -85,8 +86,9 @@ namespace MyStock.ViewModels
         {
             messageService = new MessageService();
             apiService = new ApiService();
-            IsEnabled = true;
-            IsToggled = true;
+            this.LoginCommand = new Command(this.Login);
+            this.IsEnabled = true;
+            this.IsToggled = true;
         }
 
         public ICommand LoginCommand
@@ -124,10 +126,36 @@ namespace MyStock.ViewModels
             IsEnabled = false;
 
             var connection = await apiService.CheckConnection();
-            if (connection.IsSuccess)
+            if (!connection.IsSuccess)
             {
-
+                IsRunning = false;
+                IsEnabled = true;
+                await messageService.SendMessage("Error", connection.Message);
+                return;
             }
+
+            var response = await apiService.GetToken("http://productszuluapi.azurewebsites.net", Email, Password);
+
+            if (response == null)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await messageService.SendMessage("Error", "The service is not available, please try later.");
+                Password = null;
+                return;
+            }
+
+            if (string.IsNullOrEmpty(response.AccessToken))
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await messageService.SendMessage("Error", response.ErrorDescription);
+                Password = null;
+                return;
+            }
+
+            await messageService.SendMessage("Notification", "Welcome to the API service");
+
         }
 
        

@@ -14,14 +14,15 @@
                    FontAttributes="Bold"
                    HorizontalOptions="Center" />
             <Grid 
-                Margin="50,10">
+                Margin="20,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Label Text="Email"
                        Grid.Row="0"
-                       Grid.Column="0"/>
+                       Grid.Column="0"
+                       VerticalOptions="Center"/>
                 <Entry Text="{Binding Email, Mode=TwoWay}"
                        Placeholder="Enter your email..."
                        Grid.Row="0"
@@ -29,16 +30,19 @@
                        Keyboard="Email"/>
                 <Label Text="Password"
                        Grid.Row="1"
-                       Grid.Column="0"/>
+                       Grid.Column="0"
+                       VerticalOptions="Center"/>
                 <Entry Text="{Binding Password, Mode=TwoWay}"
                        Placeholder="Enter your password..."
                        Grid.Row="1"
                        Grid.Column="1"
                        IsPassword="True"/>
             </Grid>
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal"
+                         Margin="20,10">
                 <Label Text="Remember me"
-                       VerticalOptions="Center"/>
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"/>
                 <Switch 
                         IsToggled="{Binding IsToggled, Mode=TwoWay}"/>
             </StackLayout>
@@ -50,15 +54,15 @@
                    </Label.GestureRecognizers>
             </Label>
             <ActivityIndicator
-                IsRunningLabel="{Binding IsRunning, Mode=TwoWay}"/>
+                IsRunning="{Binding IsRunning, Mode=TwoWay}"/>
             <StackLayout Margin="50,0">
                 <Button Text="Login"
                         BackgroundColor="Navy"
                         Style="{StaticResource GeneralButton}"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         Command="{Binding LoginCommand}"/>
-                <Button Text="Register"
-                        BackgroundColor="Blue"
+                <Button Text="Login with Facebook"
+                        BackgroundColor="Purple"
                         Style="{StaticResource GeneralButton}"
                         IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         Command="{Binding LoginWithFacebookCommand}"/>
