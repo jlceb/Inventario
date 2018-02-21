@@ -80,11 +80,13 @@ namespace MyStock.ViewModels
         }
 
         MessageService messageService;
+        NavigationService navigationService;
         ApiService apiService;
 
         public LoginViewModel()
         {
             messageService = new MessageService();
+            navigationService = new NavigationService();
             apiService = new ApiService();
             this.LoginCommand = new Command(this.Login);
             this.IsEnabled = true;
@@ -122,14 +124,14 @@ namespace MyStock.ViewModels
                 return;
             }
 
-            IsRunning = true;
-            IsEnabled = false;
+            this.IsRunning = true;
+            this.IsEnabled = false;
 
             var connection = await apiService.CheckConnection();
             if (!connection.IsSuccess)
             {
-                IsRunning = false;
-                IsEnabled = true;
+                this.IsRunning = false;
+                this.IsEnabled = true;
                 await messageService.SendMessage("Error", connection.Message);
                 return;
             }
@@ -138,23 +140,30 @@ namespace MyStock.ViewModels
 
             if (response == null)
             {
-                IsRunning = false;
-                IsEnabled = true;
+                this.IsRunning = false;
+                this.IsEnabled = true;
                 await messageService.SendMessage("Error", "The service is not available, please try later.");
-                Password = null;
+                this.Password = null;
                 return;
             }
 
             if (string.IsNullOrEmpty(response.AccessToken))
             {
-                IsRunning = false;
-                IsEnabled = true;
+                this.IsRunning = false;
+                this.IsEnabled = true;
                 await messageService.SendMessage("Error", response.ErrorDescription);
-                Password = null;
+                this.Password = null;
                 return;
             }
 
-            await messageService.SendMessage("Notification", "Welcome to the API service");
+            this.IsRunning = false;
+            this.IsEnabled = true;
+            this.Password = null;
+
+            var mainViewModel = MainViewModel.GetIntance();
+            mainViewModel.tokenResponse = response;
+            mainViewModel.Categories = new CategoriesViewModel();
+            navigationService.NavigateTo("CategoriesView");
 
         }
 

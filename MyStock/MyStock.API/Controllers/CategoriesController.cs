@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using MyStock.API.Models;
 using MyStock.Domain;
 
 namespace MyStock.API.Controllers
@@ -19,9 +20,37 @@ namespace MyStock.API.Controllers
         private DataContext db = new DataContext();
 
         // GET: api/Categories
-        public IQueryable<Category> GetCategories()
+        public async Task<IHttpActionResult> GetCategories()
         {
-            return db.Categories;
+            var categories = await db.Categories.ToListAsync();
+            var categoriesResponse = new List<CategoryResponse>();
+
+            foreach (var item in categories)
+            {
+                var productsResponse = new List<ProductResponse>();
+                foreach (var itemProd in item.Productos)
+                {
+                    productsResponse.Add(new ProductResponse
+                    {
+                        ProductId = itemProd.ProductId,
+                        Description = itemProd.Description,
+                        Image = itemProd.Image,
+                        IsActive = itemProd.IsActive,
+                        LastPurchase = itemProd.LastPurchase,
+                        Price = itemProd.Price,
+                        Stock = itemProd.Stock,
+                        Remarks = itemProd.Remarks,
+                    });
+                }
+                categoriesResponse.Add(new CategoryResponse
+                {
+                    CategoryId = item.CategoryId,
+                    Description = item.Description,
+                    Productos = productsResponse,
+                });
+            }
+
+            return Ok(categoriesResponse);
         }
 
         // GET: api/Categories/5
