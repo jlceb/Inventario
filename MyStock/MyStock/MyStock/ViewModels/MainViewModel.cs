@@ -10,6 +10,7 @@ namespace MyStock.ViewModels
         public TokenResponse tokenResponse { get; set; }
         public LoginViewModel Login { get; set; }
         public CategoriesViewModel Categories { get; set; }
+        public ProductsViewModel Products { get; set; }
 
         public MainViewModel()
         {
