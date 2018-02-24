@@ -163,7 +163,7 @@ namespace MyStock.ViewModels
             var mainViewModel = MainViewModel.GetIntance();
             mainViewModel.tokenResponse = response;
             mainViewModel.Categories = new CategoriesViewModel();
-            navigationService.NavigateTo("CategoriesView");
+            await navigationService.NavigateTo("CategoriesView");
 
         }
 

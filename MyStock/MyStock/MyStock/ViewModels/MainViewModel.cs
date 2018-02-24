@@ -1,7 +1,9 @@
 ﻿using MyStock.Models;
+using MyStock.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace MyStock.ViewModels
 {
@@ -11,9 +13,25 @@ namespace MyStock.ViewModels
         public LoginViewModel Login { get; set; }
         public CategoriesViewModel Categories { get; set; }
         public ProductsViewModel Products { get; set; }
+        public NewCategoryViewModel NewCategory { get; set; }
+
+        NavigationService navigationService;
+
+        public ICommand NewCategoryCommand
+        {
+            get;
+            set;
+        }
+
+        public async void GoNewCategory()
+        {
+            NewCategory = new NewCategoryViewModel();
+            await navigationService.NavigateTo("NewCategoryView");
+        }
 
         public MainViewModel()
         {
+            navigationService = new NavigationService();
             Login = new LoginViewModel();
         }
 

@@ -26,11 +26,11 @@ namespace MyStock.Models
             set;
         }
 
-        void SelectedCategory()
+        async void SelectedCategory()
         {
             var mainViewModel = MainViewModel.GetIntance();
             mainViewModel.Products = new ProductsViewModel(Productos);
-            navigationService.NavigateTo("ProductsView");
+            await navigationService.NavigateTo("ProductsView");
         }
     }
 }

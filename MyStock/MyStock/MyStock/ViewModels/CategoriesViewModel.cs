@@ -10,6 +10,8 @@ namespace MyStock.ViewModels
 {
     public class CategoriesViewModel : ViewModelBase
     {
+        List<Category> listCategories;
+
         public ObservableCollection<Category> _categories;
         public ObservableCollection<Category> Categories
         {
@@ -29,6 +31,7 @@ namespace MyStock.ViewModels
 
         public CategoriesViewModel()
         {
+            instance = this;
             apiService = new ApiService();
             messageService = new MessageService();
             LoadCategories();
@@ -54,8 +57,26 @@ namespace MyStock.ViewModels
                 return;
             }
 
-            var listCategories = (List<Category>)response.Result;
+            listCategories = (List<Category>)response.Result;
             Categories = new ObservableCollection<Category>(listCategories.OrderBy(x => x.Description)); 
+        }
+
+        public void AddCategory(Category newCategory)
+        {
+            listCategories.Add(newCategory);
+            Categories = new ObservableCollection<Category>(listCategories.OrderBy(x => x.Description));
+        }
+
+        //Singlenton
+
+        static CategoriesViewModel instance;
+
+        public static CategoriesViewModel GetIntance()
+        {
+            if (instance == null)
+                return new CategoriesViewModel();
+            else
+                return instance;
         }
     }
 }
