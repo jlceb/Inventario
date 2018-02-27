@@ -86,16 +86,17 @@ namespace MyStock.API.Controllers
             {
                 await db.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
-                if (!CategoryExists(id))
+                if (e.InnerException != null && e.InnerException.InnerException != null && e.InnerException.InnerException.Message.Contains("Index"))
                 {
-                    return NotFound();
+                    return BadRequest("There are a record with the same description.");
                 }
                 else
                 {
-                    throw;
+                    return BadRequest(e.Message);
                 }
+                
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -121,7 +122,10 @@ namespace MyStock.API.Controllers
                 {
                     return BadRequest("There are a record with the same description.");
                 }
-                return BadRequest(e.Message);
+                else
+                {
+                    return BadRequest(e.Message);
+                }
             }
 
             return CreatedAtRoute("DefaultApi", new { id = category.CategoryId }, category);
@@ -138,7 +142,21 @@ namespace MyStock.API.Controllers
             }
 
             db.Categories.Remove(category);
-            await db.SaveChangesAsync();
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                if (e.InnerException != null && e.InnerException.InnerException != null && e.InnerException.InnerException.Message.Contains("REFERENCE"))
+                {
+                    return BadRequest("You can´t delete this record, because it has related record.");
+                }
+                else
+                {
+                    return BadRequest(e.Message);
+                }
+            }
 
             return Ok(category);
         }

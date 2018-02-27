@@ -14,10 +14,17 @@ namespace MyStock.Models
         public List<Product> Productos { get; set; }
 
         NavigationService navigationService;
+        MessageService messageService;
 
         public Category()
         {
             navigationService = new NavigationService();
+            messageService = new MessageService();
+        }
+
+        public override int GetHashCode()
+        {
+            return this.CategoryId;
         }
 
         public ICommand SelectedCategoryCommand
@@ -36,6 +43,24 @@ namespace MyStock.Models
         {
             get;
             set;
+        }
+
+        async void Edit()
+        {
+            var mainViewModel = MainViewModel.GetIntance();
+            mainViewModel.EditCategory = new EditCategoryViewModel(this);
+            await navigationService.NavigateTo("EditCategoryView");
+        }
+
+        async void Delete()
+        {
+            var response = await messageService.ConfirmMessage("Confirm", "Are you sure to delete this record?");
+            if(!response)
+            {
+                return;
+            }
+            var categoriesViewModel = CategoriesViewModel.GetIntance();
+            categoriesViewModel.DeleteCategory(this);
         }
 
         async void SelectedCategory()

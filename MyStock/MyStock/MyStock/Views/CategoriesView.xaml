@@ -48,7 +48,7 @@
                                     Source="ic_chevron_right"
                                     HorizontalOptions="End">
                                     <Image.GestureRecognizers>
-                                        <TapGestureRecognizers Command="{Binding SelectedCategoryCommand}"/>
+                                        <TapGestureRecognizer Command="{Binding SelectedCategoryCommand}"/>
                                     </Image.GestureRecognizers>
                                 </Image>
                             </Grid>

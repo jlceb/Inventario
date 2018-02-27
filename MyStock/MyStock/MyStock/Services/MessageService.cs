@@ -9,5 +9,10 @@ namespace MyStock.Services
         {
             await MyStock.App.Current.MainPage.DisplayAlert(title, message, "Accept");
         }
+
+        public async Task<bool> ConfirmMessage(string title, string message)
+        {
+            return await MyStock.App.Current.MainPage.DisplayAlert(title, message, "Yes","No");
+        }
     }
 }
