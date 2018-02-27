@@ -111,7 +111,18 @@ namespace MyStock.API.Controllers
             }
 
             db.Categories.Add(category);
-            await db.SaveChangesAsync();
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                if(e.InnerException != null && e.InnerException.InnerException != null && e.InnerException.InnerException.Message.Contains("Index"))
+                {
+                    return BadRequest("There are a record with the same description.");
+                }
+                return BadRequest(e.Message);
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = category.CategoryId }, category);
         }

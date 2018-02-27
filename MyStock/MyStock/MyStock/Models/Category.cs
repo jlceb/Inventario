@@ -26,6 +26,18 @@ namespace MyStock.Models
             set;
         }
 
+        public ICommand EditCommand
+        {
+            get;
+            set;
+        }
+
+        public ICommand DeleteCommand
+        {
+            get;
+            set;
+        }
+
         async void SelectedCategory()
         {
             var mainViewModel = MainViewModel.GetIntance();

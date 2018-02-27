@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace MyStock.ViewModels
 {
@@ -12,7 +14,21 @@ namespace MyStock.ViewModels
     {
         List<Category> listCategories;
 
-        public ObservableCollection<Category> _categories;
+        bool isRefreshing;
+        public bool IsRefreshing
+        {
+            get
+            {
+                return isRefreshing;
+            }
+            set
+            {
+                isRefreshing = value;
+                this.Notify("IsRefreshing");
+            }
+        }
+
+        ObservableCollection<Category> _categories;
         public ObservableCollection<Category> Categories
         {
             get
@@ -34,12 +50,20 @@ namespace MyStock.ViewModels
             instance = this;
             apiService = new ApiService();
             messageService = new MessageService();
+            this.RefreshCommand = new Command(this.LoadCategories);
             LoadCategories();
+        }
+
+        public ICommand RefreshCommand
+        {
+            get;
+            set;
         }
 
         async void LoadCategories()
         {
             var connection = await apiService.CheckConnection();
+            IsRefreshing = true;
 
             if(!connection.IsSuccess)
             {
@@ -58,7 +82,8 @@ namespace MyStock.ViewModels
             }
 
             listCategories = (List<Category>)response.Result;
-            Categories = new ObservableCollection<Category>(listCategories.OrderBy(x => x.Description)); 
+            Categories = new ObservableCollection<Category>(listCategories.OrderBy(x => x.Description));
+            IsRefreshing = false;
         }
 
         public void AddCategory(Category newCategory)
