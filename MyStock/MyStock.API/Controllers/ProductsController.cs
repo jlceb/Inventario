@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using MyStock.API.Helpers;
+using MyStock.API.Models;
 using MyStock.Domain;
 
 namespace MyStock.API.Controllers
@@ -74,13 +77,30 @@ namespace MyStock.API.Controllers
 
         // POST: api/Products
         [ResponseType(typeof(Product))]
-        public async Task<IHttpActionResult> PostProduct(Product product)
+        public async Task<IHttpActionResult> PostProduct(ProductRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            if (request.ImageArray != null && request.ImageArray.Length > 0)
+            {
+                var stream = new MemoryStream(request.ImageArray);
+                var guid = Guid.NewGuid().ToString();
+                var file = string.Format("{0}.jpg", guid);
+                var folder = "~/Content/Images";
+                var fullpath = string.Format("{0}/{1}", folder, file);
+                var response = ImageManagementService.UploadPhoto(stream, folder, file);
+
+                if (response)
+                {
+                    request.Image = fullpath;
+                }
+            }
+
+            var product = ToProduct(request);
+      
             db.Products.Add(product);
             await db.SaveChangesAsync();
 
@@ -101,6 +121,23 @@ namespace MyStock.API.Controllers
             await db.SaveChangesAsync();
 
             return Ok(product);
+        }
+
+        private Product ToProduct(ProductRequest request)
+        {
+            return new Product
+            {
+                Category = request.Category,
+                CategoryId = request.CategoryId,
+                Description = request.Description,
+                Image = request.Image,
+                IsActive = request.IsActive,
+                LastPurchase = request.LastPurchase,
+                Price = request.Price,
+                ProductId = request.ProductId,
+                Remarks = request.Remarks,
+                Stock = request.Stock,
+            };
         }
 
         protected override void Dispose(bool disposing)

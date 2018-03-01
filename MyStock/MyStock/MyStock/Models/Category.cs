@@ -66,6 +66,7 @@ namespace MyStock.Models
         async void SelectedCategory()
         {
             var mainViewModel = MainViewModel.GetIntance();
+            mainViewModel.Category = this;
             mainViewModel.Products = new ProductsViewModel(Productos);
             await navigationService.NavigateTo("ProductsView");
         }

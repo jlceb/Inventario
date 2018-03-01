@@ -22,12 +22,19 @@ namespace MyStock.Models
 
         public double Stock { get; set; }
 
+        public byte[] ImageArray { get; set; }
+
         public string ImageFullPath
         {
             get
             {
+                if(string.IsNullOrEmpty(Image))
+                {
+                    return "ic_noimage";
+                }
                 return string.Format("http://productszulu.azurewebsites.net/{0}", Image.Substring(1));
             }
         }
+        public int CategoryId { get; set; }
     }
 }
