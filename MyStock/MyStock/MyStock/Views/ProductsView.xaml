@@ -4,6 +4,11 @@
              x:Class="MyStock.Views.ProductsView"
              BindingContext="{Binding MvM, Source={StaticResource Locator}}"
              Title="{Binding Category.Description}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Command="{Binding NewProductCommand}"
+            Icon="ic_add_cat"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Products}"
@@ -15,6 +20,16 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem
+                                    Command="{Binding EditCommand}"
+                                    Text="Edit">
+                                </MenuItem>
+                                <MenuItem
+                                    Command="{Binding DeleteCommand}"
+                                    Text="Delete">
+                                </MenuItem>
+                            </ViewCell.ContextActions>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>

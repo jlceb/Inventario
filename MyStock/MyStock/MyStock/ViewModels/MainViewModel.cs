@@ -16,6 +16,7 @@ namespace MyStock.ViewModels
         public NewCategoryViewModel NewCategory { get; set; }
         public EditCategoryViewModel EditCategory { get; set; }
         public NewProductViewModel NewProduct { get; set; }
+        public EditProductViewModel EditProduct { get; set; }
         public Category Category { get; set; }
 
         NavigationService navigationService;
