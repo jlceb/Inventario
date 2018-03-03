@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyStock.Views.NewCustomerView"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="New Customer">
+    <ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding NewCustomer}">
+            <StackLayout
+                Padding="10"
+                Spacing="16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Text="First name:"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Placeholder="Enter the first name..."
+                        Text="{Binding FirstName, Mode=TwoWay}"/>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Text="Last name:"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Placeholder="Enter the last name..."
+                        Text="{Binding LastName, Mode=TwoWay}"/>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Text="Email:"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Keyboard="Email"
+                        Placeholder="Enter the email..."
+                        Text="{Binding Email, Mode=TwoWay}"/>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        Text="Phone:"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        Keyboard="Telephone"
+                        Placeholder="Enter the phone..."
+                        Text="{Binding Phone, Mode=TwoWay}"/>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="4"
+                        Text="Address:"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Column="1"
+                        Grid.Row="4"
+                        Placeholder="Enter the address..."
+                        Text="{Binding Address, Mode=TwoWay}"/>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="5"
+                        Text="Password:"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Column="1"
+                        Grid.Row="5"
+                        IsPassword="true"
+                        Placeholder="Enter the password..."
+                        Text="{Binding Password, Mode=TwoWay}"/>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="6"
+                        Text="Confirm:"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Column="1"
+                        Grid.Row="6"
+                        IsPassword="true"
+                        Placeholder="Enter the password confirm..."
+                        Text="{Binding Confirm, Mode=TwoWay}"/>
+                </Grid>
+                <ActivityIndicator
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}"
+                    VerticalOptions="CenterAndExpand">
+                </ActivityIndicator>
+                <Button
+                    Margin="50,0"
+                    Text="Save"
+                    BackgroundColor="Navy"
+                    VerticalOptions="EndAndExpand"
+                    Style="{StaticResource GeneralButton}"
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                    Command="{Binding SaveCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
