@@ -30,6 +30,9 @@ namespace MyStock.Services
                 case "EditProductView":
                     await MyStock.App.Current.MainPage.Navigation.PushAsync(new EditProductView());
                     break;
+                case "NewCustomerView":
+                    await MyStock.App.Current.MainPage.Navigation.PushAsync(new NewCustomerView());
+                    break;
                 default:
                     break;
             }

@@ -89,6 +89,7 @@ namespace MyStock.ViewModels
             navigationService = new NavigationService();
             apiService = new ApiService();
             this.LoginCommand = new Command(this.Login);
+            this.RegisterNewUserCommand = new Command(this.RegisterNewCustomer);
             this.IsEnabled = true;
             this.IsToggled = true;
         }
@@ -167,6 +168,11 @@ namespace MyStock.ViewModels
 
         }
 
-       
+        async void RegisterNewCustomer()
+        {
+            var mainViewModel = MainViewModel.GetIntance();
+            mainViewModel.NewCustomer = new NewCustomerViewModel();
+            await navigationService.NavigateTo("NewCustomerView");
+        }
     }
 }
