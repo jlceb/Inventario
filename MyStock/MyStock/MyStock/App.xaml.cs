@@ -10,11 +10,15 @@ namespace MyStock
 {
 	public partial class App : Application
 	{
-		public App ()
+        public static NavigationPage Navigator { get; internal set; }
+
+        public App ()
 		{
 			InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginView());
+            //MainPage = new NavigationPage(new LoginView());
+            MainPage = new NavigationPage(new MasterView());
+
 		}
 
 		protected override void OnStart ()
