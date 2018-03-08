@@ -14,6 +14,10 @@
                 <Setter Property="TextColor" Value="White"></Setter>
             </Style>
 
+            <!-- Colores-->
+            <Color x:Key="BackgroundListView">#448aff</Color>
+            <Color x:Key="FontColorMenu">#e4eaf4</Color>
+
             <!-- Locator -->
             <infra:InstanceLocator x:Key="Locator"></infra:InstanceLocator>
             

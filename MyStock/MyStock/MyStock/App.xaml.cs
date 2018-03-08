@@ -16,8 +16,7 @@ namespace MyStock
 		{
 			InitializeComponent();
 
-            //MainPage = new NavigationPage(new LoginView());
-            MainPage = new NavigationPage(new MasterView());
+            MainPage = new NavigationPage(new LoginView());
 
 		}
 

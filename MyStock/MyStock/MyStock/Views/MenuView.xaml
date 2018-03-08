@@ -5,10 +5,44 @@
              BindingContext="{Binding MvM, Source={StaticResource Locator}}"
              Title="Menú">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout
+            Padding="10,30">
+            <Label
+                FontAttributes="Bold"
+                FontSize="Large"
+                Text="Products"
+                TextColor="{StaticResource FontColorMenu}"/>
+            <ListView 
+                BackgroundColor="{StaticResource BackgroundListView}" 
+                ItemsSource="{Binding MyMenu}" 
+                HasUnevenRows="True"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image 
+                                    Grid.Column="0"  
+                                    HeightRequest="50"
+                                    Source="{Binding Icon}" 
+                                    WidthRequest="50"/>
+                                <Label 
+                                    Grid.Column="1"  
+                                    Text="{Binding Title}"
+                                    TextColor="{StaticResource FontColorMenu}" 
+                                    VerticalOptions="Center"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
