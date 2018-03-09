@@ -65,7 +65,7 @@ namespace MyStock.Models
         async void Edit()
         {
             MainViewModel.GetIntance().EditProduct = new EditProductViewModel(this);
-            await navigationService.NavigateTo("EditProductView");
+            await navigationService.NavigateOnMaster("EditProductView");
         }
 
         async void Delete()

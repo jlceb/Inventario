@@ -33,7 +33,7 @@ namespace MyStock.ViewModels
         public async void GoNewCategory()
         {
             NewCategory = new NewCategoryViewModel();
-            await navigationService.NavigateTo("NewCategoryView");
+            await navigationService.NavigateOnMaster("NewCategoryView");
         }
 
         public MainViewModel()

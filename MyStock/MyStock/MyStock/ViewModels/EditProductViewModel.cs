@@ -80,7 +80,7 @@ namespace MyStock.ViewModels
             }
             set
             {
-                price = value;
+                remarks = value;
                 this.Notify("Remarks");
             }
         }
@@ -250,7 +250,7 @@ namespace MyStock.ViewModels
 
             var productsViewModel = ProductsViewModel.GetIntance();
             productsViewModel.UpdateProduct(producttoedit);
-            await navigationService.NavigateToBack();
+            await navigationService.NavigateToBackOnMaster();
 
         }
 

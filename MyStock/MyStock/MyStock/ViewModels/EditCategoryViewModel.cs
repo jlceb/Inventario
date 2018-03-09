@@ -111,7 +111,7 @@ namespace MyStock.ViewModels
 
             var categoriesViewModel = CategoriesViewModel.GetIntance();
             categoriesViewModel.UpdateCategory(categorytoedit);
-            await navigationService.NavigateToBack();
+            await navigationService.NavigateToBackOnMaster();
 
             IsEnabled = true;
             IsRunning = false;

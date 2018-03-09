@@ -19,7 +19,8 @@ namespace MyStock.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            App.Navigator = Navigator; 
+            App.Navigator = Navigator;
+            App.Master = this;
         }
 	}
 }

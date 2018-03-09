@@ -3,42 +3,68 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MyStock.Services
 {
     public class NavigationService
     {
-        public async Task NavigateTo(string page)
+
+        public void SetMainPage(string page)
         {
             switch (page)
             {
-                case "CategoriesView":
-                    await MyStock.App.Current.MainPage.Navigation.PushAsync(new CategoriesView());
+                case "LoginView":
+                    Application.Current.MainPage = new NavigationPage(new LoginView());
                     break;
-                case "ProductsView":
-                    await MyStock.App.Current.MainPage.Navigation.PushAsync(new ProductsView());
-                    break;
-                case "NewCategoryView":
-                    await MyStock.App.Current.MainPage.Navigation.PushAsync(new NewCategoryView());
-                    break;
-                case "EditCategoryView":
-                    await MyStock.App.Current.MainPage.Navigation.PushAsync(new EditCategoryView());
-                    break;
-                case "NewProductView":
-                    await MyStock.App.Current.MainPage.Navigation.PushAsync(new NewProductView());
-                    break;
-                case "EditProductView":
-                    await MyStock.App.Current.MainPage.Navigation.PushAsync(new EditProductView());
-                    break;
-                case "NewCustomerView":
-                    await MyStock.App.Current.MainPage.Navigation.PushAsync(new NewCustomerView());
-                    break;
-                default:
+                case "MasterView":
+                    Application.Current.MainPage = new MasterView();
                     break;
             }
         }
 
-        public async Task NavigateToBack()
+        public async Task NavigateOnMaster(string page)
+        {
+            App.Master.IsPresented = false;
+            switch (page)
+            {
+                case "CategoriesView":
+                    await App.Navigator.PushAsync(new CategoriesView());
+                    break;
+                case "ProductsView":
+                    await App.Navigator.PushAsync(new ProductsView());
+                    break;
+                case "NewCategoryView":
+                    await App.Navigator.PushAsync(new NewCategoryView());
+                    break;
+                case "EditCategoryView":
+                    await App.Navigator.PushAsync(new EditCategoryView());
+                    break;
+                case "NewProductView":
+                    await App.Navigator.PushAsync(new NewProductView());
+                    break;
+                case "EditProductView":
+                    await App.Navigator.PushAsync(new EditProductView());
+                    break;
+            }
+        }
+
+        public async Task NavigateOnLogin(string page)
+        {
+            switch (page)
+            {
+                case "NewCustomerView":
+                    await MyStock.App.Current.MainPage.Navigation.PushAsync(new NewCustomerView());
+                    break;
+            }
+        }
+
+        public async Task NavigateToBackOnMaster()
+        {
+            await App.Navigator.PopAsync();
+        }
+
+        public async Task NavigateToBackOnLogin()
         {
             await MyStock.App.Current.MainPage.Navigation.PopAsync();
         }

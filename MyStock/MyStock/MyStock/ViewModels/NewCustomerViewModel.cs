@@ -262,8 +262,8 @@ namespace MyStock.ViewModels
 
                 var mainViewModel = MainViewModel.GetIntance();
                 mainViewModel.Categories = new CategoriesViewModel();
-                await navigationService.NavigateToBack();
-                await navigationService.NavigateTo("CategoriesView");
+                await navigationService.NavigateToBackOnMaster();
+                await navigationService.NavigateOnMaster("CategoriesView");
                 IsRunning = false;
                 IsEnabled = true;
 

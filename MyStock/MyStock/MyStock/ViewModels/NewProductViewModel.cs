@@ -301,9 +301,9 @@ namespace MyStock.ViewModels
             }
 
             var productsViewModel = ProductsViewModel.GetIntance();
-            productsViewModel.Add(product);
+            productsViewModel.AddProduct(product);
 
-            await navigationService.BackOnMaster();
+            await navigationService.NavigateToBackOnMaster();
 
             IsRunning = false;
             IsEnabled = true;

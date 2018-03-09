@@ -164,7 +164,7 @@ namespace MyStock.ViewModels
             var mainViewModel = MainViewModel.GetIntance();
             mainViewModel.tokenResponse = response;
             mainViewModel.Categories = new CategoriesViewModel();
-            await navigationService.NavigateTo("CategoriesView");
+            await navigationService.NavigateOnMaster("CategoriesView");
 
         }
 
@@ -172,7 +172,7 @@ namespace MyStock.ViewModels
         {
             var mainViewModel = MainViewModel.GetIntance();
             mainViewModel.NewCustomer = new NewCustomerViewModel();
-            await navigationService.NavigateTo("NewCustomerView");
+            await navigationService.NavigateOnLogin("NewCustomerView");
         }
     }
 }

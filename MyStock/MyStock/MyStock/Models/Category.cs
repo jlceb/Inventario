@@ -50,7 +50,7 @@ namespace MyStock.Models
         {
             var mainViewModel = MainViewModel.GetIntance();
             mainViewModel.EditCategory = new EditCategoryViewModel(this);
-            await navigationService.NavigateTo("EditCategoryView");
+            await navigationService.NavigateOnMaster("EditCategoryView");
         }
 
         async void Delete()
@@ -69,7 +69,7 @@ namespace MyStock.Models
             var mainViewModel = MainViewModel.GetIntance();
             mainViewModel.Category = this;
             mainViewModel.Products = new ProductsViewModel(Productos);
-            await navigationService.NavigateTo("ProductsView");
+            await navigationService.NavigateOnMaster("ProductsView");
         }
     }
 }

@@ -112,7 +112,7 @@ namespace MyStock.ViewModels
             category = (Category)response.Result;
             var categoriesViewModel = CategoriesViewModel.GetIntance();
             categoriesViewModel.AddCategory(category);
-            await navigationService.NavigateToBack();
+            await navigationService.NavigateToBackOnMaster();
 
             IsEnabled = true;
             IsRunning = false;
