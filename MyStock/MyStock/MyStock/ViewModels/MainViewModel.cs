@@ -19,6 +19,7 @@ namespace MyStock.ViewModels
         public NewProductViewModel NewProduct { get; set; }
         public EditProductViewModel EditProduct { get; set; }
         public NewCustomerViewModel NewCustomer { get; set; }
+        public UbicationsViewModel Ubications { get; set; }
         public Category Category { get; set; }
         public ObservableCollection<Menu> MyMenu { get; set; }
 

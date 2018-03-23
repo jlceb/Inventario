@@ -46,6 +46,9 @@ namespace MyStock.Services
                 case "EditProductView":
                     await App.Navigator.PushAsync(new EditProductView());
                     break;
+                case "UbicationsView":
+                    await App.Navigator.PushAsync(new UbicationsView());
+                    break;
             }
         }
 
@@ -55,6 +58,9 @@ namespace MyStock.Services
             {
                 case "NewCustomerView":
                     await MyStock.App.Current.MainPage.Navigation.PushAsync(new NewCustomerView());
+                    break;
+                case "LoginFacebookView":
+                    await MyStock.App.Current.MainPage.Navigation.PushAsync(new LoginFacebookView());
                     break;
             }
         }

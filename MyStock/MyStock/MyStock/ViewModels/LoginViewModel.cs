@@ -89,6 +89,7 @@ namespace MyStock.ViewModels
             navigationService = new NavigationService();
             apiService = new ApiService();
             this.LoginCommand = new Command(this.Login);
+            this.LoginWithFacebookCommand = new Command(this.LoginWithFacebook);
             this.RegisterNewUserCommand = new Command(this.RegisterNewCustomer);
             this.IsEnabled = true;
             this.IsToggled = true;
@@ -164,7 +165,7 @@ namespace MyStock.ViewModels
             var mainViewModel = MainViewModel.GetIntance();
             mainViewModel.tokenResponse = response;
             mainViewModel.Categories = new CategoriesViewModel();
-            await navigationService.NavigateOnMaster("CategoriesView");
+            navigationService.SetMainPage("MasterView");
 
         }
 
@@ -173,6 +174,11 @@ namespace MyStock.ViewModels
             var mainViewModel = MainViewModel.GetIntance();
             mainViewModel.NewCustomer = new NewCustomerViewModel();
             await navigationService.NavigateOnLogin("NewCustomerView");
+        }
+
+        async void LoginWithFacebook()
+        {
+            await navigationService.NavigateOnLogin("LoginFacebookView");
         }
     }
 }

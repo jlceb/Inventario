@@ -1,4 +1,5 @@
-﻿using MyStock.Views;
+﻿using MyStock.Models;
+using MyStock.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,5 +36,18 @@ namespace MyStock
 		{
 			// Handle when your app resumes
 		}
-	}
+
+        public static Action LoginFacebookFail
+        {
+            get
+            {
+                return new Action(() => Current.MainPage = new NavigationPage(new LoginView()));
+            }
+        }
+
+        public static void LoginFacebookSuccess(FacebookResponse profile)
+        {
+            Current.MainPage = new MasterView();
+        }
+    }
 }

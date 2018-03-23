@@ -22,5 +22,7 @@ namespace MyStock.Domain
         public DbSet<Product> Products { get; set; }
 
         public System.Data.Entity.DbSet<MyStock.Domain.Customer> Customers { get; set; }
+
+        public System.Data.Entity.DbSet<MyStock.Domain.Ubication> Ubications { get; set; }
     }
 }
